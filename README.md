@@ -24,6 +24,20 @@ Write a function called canVote that returns true or false if the age of a user 
 ####Assignment 1:
 Write a function that takes a user as an input and greets them with their name and age
 
+####Assignment 2:
+Write a function that takes a new object as input which has name , age  and gender and greets the user with their gender (Hi Mr/Mrs/Others harkirat, your age is 21)
+
+####Assignment 3:
+// Also tell the user if they are legal to vote or not
+
+####Assignment 4.0:
+Write a function that takes an array of numbers as input, and returns a new array with only even values. Read about filter in JS
+
+####Assignment 4.1:
+Write a function that takes an array of users as inputs and returns only the users who are more than 18 years old
+
+####Assignment 4.2:
+Create a function that takes an array of objects as input, and returns the users whose age > 18 and are male
 
 
 

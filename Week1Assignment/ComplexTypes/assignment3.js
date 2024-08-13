@@ -12,9 +12,16 @@ function getTitle(user) {
   else return "Others";
 }
 
+function canVote(user) {
+  if(user.age > 18)
+    return "you are eligible to vote"
+  else
+    return "you are not eligible to vote"
+}
+
 function greet(user) {
   console.log(
-    "Hi " + getTitle(user) + " " + user.name + ", your age is " + user.age,
+    "Hi " + getTitle(user) + " " + user.name + ", your age is " + user.age + ", " +canVote(user),
   );
 }
 
