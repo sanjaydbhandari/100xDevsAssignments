@@ -5,6 +5,7 @@ function sum(num){
   for(let i=0;i<=num;i++){
     sum+=i;
   }
+  // sum = num*(num +1)/2;//using AP
   return sum;
 }
 
