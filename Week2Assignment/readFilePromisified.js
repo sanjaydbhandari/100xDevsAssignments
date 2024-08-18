@@ -15,4 +15,4 @@ function callback(){
 
 readFilePromisified('a.txt','utf-8').then((res)=>{
     console.log(res);
-}).then(callback);
+}).then(cal);
