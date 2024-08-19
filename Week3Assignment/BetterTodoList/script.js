@@ -1,26 +1,31 @@
-const bodyEl = document.querySelector('body');
-const parentEl = document.querySelector('div');
-let counter=0;
+const bodyEl = document.querySelector("body");
+const todoContainerEl = document.querySelector("#todo-container");
+const todoListEl = document.querySelector("#todo-list");
+const inputEl = document.querySelector('input');
+let counter = 0;
 
-function addTodo(){
-    let inputEle = document.querySelector("input");
-    if(inputEle.value.trim()=='')
-        return 
-    let newTodoDivEl = document.createElement("div");
-    // newTodoDivEl.classList="parent";
-    newTodoDivEl.innerHTML=`<div class="todo-${counter}"><span>${inputEle.value}</span><button onclick="editTodo('todo-${counter}')">Edit</button><button onclick="deleteTodo('todo-${counter}')">Delete</button></div>`;
-    document.querySelector('body').appendChild(newTodoDivEl);
-    inputEle.value="";
-    counter++;
-}
+const addTodo = () => {
+    const todolistContainer=document.createElement('div');
+    todolistContainer.classList=`todo-${counter}`
+    const taskEl=document.createElement('div');
+    taskEl.classList="task"
+    taskEl.innerHTML=inputEl.value;
 
-function deleteTodo(id){
-    const deleteNode = document.querySelector(`.${id}`);
-    deleteNode.parentElement.removeChild(deleteNode);
-}
+    const deleteBtn=document.createElement('button');
+    deleteBtn.textContent="Delete";
+    deleteBtn.addEventListener('click',deleteTodo)
 
-function editTodo(id){
-    const editNode = document.querySelector(`.${id}`).childNodes[0].innerHTML;
-    let inputEle = document.querySelector("input");
-    inputEle.value=editNode;
+    todolistContainer.appendChild(taskEl)
+    todolistContainer.appendChild(deleteBtn);
+    
+    todoListEl.appendChild(todolistContainer);
+    todolistContainer.classList=`todo-${counter}`;
+    inputEl.value="";
+} 
+
+const deleteTodo = (id) =>{
+    if(confirm('Are you sure you want to delete?')){
+        targetList = document.querySelector(`.todo-${counter}`);
+        todoListEl.removeChild(targetList);
+    }
 }

@@ -1,0 +1,139 @@
+
+:root{
+    --light:#EBD3F8;
+    --medium:#EBD3F8;
+    --light-dark:#AD49E1; 
+    --dark:#2E073F;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#todo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: var(--light);
+    margin-top: 4rem;
+    padding: 1.5rem;
+    width: 40vw;
+    border-radius: 4px;
+}
+
+#todo-container .title{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 3rem;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.input-container{
+    display: grid;
+    grid-template-columns: 1fr .2fr;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+#input-btn{
+    padding: .5rem 1.5rem;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+}
+
+#todo-btn svg{
+    width: 1rem;
+}
+
+#todo-btn {
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--dark);
+    z-index: 1;
+    font-weight: 900;
+}
+
+#todo-btn::before, #todo-btn::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    background-color: var(--dark);
+    transition: .5s ease;
+}
+
+#todo-btn::before {
+    top: -1em;
+    left: -1em;
+}
+
+#todo-btn::after {
+    left: calc(100% + 1em);
+    top: calc(100% + 1em);
+}
+
+#todo-btn:hover::before, #todo-btn:hover::after {
+    height: 410px;
+    width: 410px;
+}
+
+#todo-btn:hover {
+    color: var(--light);
+    font-weight: 900;
+}
+
+#todo-btn:active {
+    filter: brightness(.8);
+}
+
+
+#todo-container #todo-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+#todo-list div{
+    display: grid;
+    grid-template-columns: 1fr .2fr;
+    width: 100%;
+    background-color: var(--light-dark);
+    padding: 1rem 1.5rem;
+}
+
+.task{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #2E073F;
+}
