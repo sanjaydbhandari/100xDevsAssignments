@@ -56,6 +56,10 @@ body{
     border: none;
 }
 
+#input-btn:focus{
+    border: 2px solid var(--dark);
+}
+
 #todo-btn svg{
     width: 1rem;
 }
