@@ -57,7 +57,7 @@ body{
 }
 
 #input-btn:focus{
-    border: 2px solid var(--dark);
+    border: 2px solid var(--dark); 
 }
 
 #todo-btn svg{
@@ -118,7 +118,6 @@ body{
 #todo-btn:active {
     filter: brightness(.8);
 }
-
 
 #todo-container #todo-list{
     display: flex;

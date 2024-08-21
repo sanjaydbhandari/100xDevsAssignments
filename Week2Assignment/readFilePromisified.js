@@ -15,4 +15,22 @@ function callback(){
 
 readFilePromisified('a.txt','utf-8').then((res)=>{
     console.log(res);
-}).then(cal);
+}).then(callback);
+
+
+// practising 
+
+// function readFilePromisified(fileName,contentType){
+//     return new Promise((resolve,reject)=>{
+//         fs.readFile(fileName,contentType,(err,data)=>{
+//             if(data)
+//                 resolve(data)
+//         })
+//     })
+// }
+
+// readFilePromisified('./a.txt','utf8').then((res)=>{
+//     console.log(res);
+// }).then(()=>{
+//     console.log("file content fetch successfully!");
+// });
