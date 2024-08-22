@@ -9,7 +9,7 @@ function setTimeoutPromisified(ms){
 }
 
 function callback(){
-    console.log('hey sanjay!')
+    console.log('set Timeout completed succussfully')
 }
 
 setTimeoutPromisified(5000).then(callback)

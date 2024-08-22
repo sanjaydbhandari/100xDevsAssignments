@@ -7,4 +7,4 @@ function fetchPromisified(url){
     })
 }
 
-fetchPromisified("https://api.publicapis.org/entries")
+fetchPromisified("https://api.publicapis.org/entries") 
