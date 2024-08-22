@@ -43,6 +43,7 @@ body{
 .input-container{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
     width: 100%;
     margin-bottom: 1.5rem;
@@ -203,6 +204,7 @@ body{
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-wrap: wrap;
     background: linear-gradient(to right, var(--dark), var(--light-dark));
     cursor: pointer;
     transition: all 0.3s ease-in-out;
