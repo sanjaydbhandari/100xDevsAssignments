@@ -1,10 +1,13 @@
-function fetchPromisified(url){
-    return new Promise((resolve,reject)=>{
-        fetch(url).then((res)=>{
-            console.log(res);
-            resolve()
-        })
-    })
+function fetchPromisified(url) {
+    return new Promise((resolve, reject) => {
+        fetch(url).then((res) => {
+            resolve(res.json());
+        });
+    });
 }
 
-fetchPromisified("https://api.publicapis.org/entries") 
+fetchPromisified("https://jsonplaceholder.typicode.com/posts/1")
+    .then((res) => {
+        console.log(res);
+    })
+    .then(() => console.log("fetch data succussfully"));
