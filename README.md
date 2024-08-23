@@ -105,4 +105,24 @@ Write a function `isAnagram` which takes 2 parameters and returns true/false if 
 What's Anagram?
 A word, phrase, or name formed by rearranging the letters of another, such as spar, formed from rasp.
 
+#### expenditure-analysis.js
+
+Implement a function `calculateTotalSpentByCategory` which takes a list of transactions as parameter
+and return a list of objects where each object is unique category-wise and has total price spent as its value.
+transactions is an array where each
+Transaction - an object like 
+    {
+    id: 1,
+    timestamp: 1656076800000,
+    price: 10,
+    category: 'Food',
+    itemName: 'Pizza',
+}
+Output - [{ category: 'Food', totalSpent: 10 }] // Can have multiple categories, only one example is mentioned here
+
+#### findLargestElement.js
+Write a function `findLargestElement` that takes an array of numbers and returns the largest element.
+  Example:
+  - Input: [3, 7, 2, 9, 1]
+  - Output: 9
 
