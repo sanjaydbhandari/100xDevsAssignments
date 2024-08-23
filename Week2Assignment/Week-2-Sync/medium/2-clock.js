@@ -23,7 +23,7 @@ function setIntervalCounter() {
   }, 1000);
 }
 
-setIntervalCounter();
+setIntervalCounter();-
 
 // 2-counter.md : setTimeout
 

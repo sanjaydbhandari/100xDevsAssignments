@@ -96,4 +96,13 @@ Can you make it so that it updates every second, and shows time in the following
 HH:MM::SS (Eg. 13:45:23)
 HH:MM::SS AM/PM (Eg 01:45:23 PM)
 
+## Week-2
+
+### easy
+
+#### anagram.js :
+Write a function `isAnagram` which takes 2 parameters and returns true/false if those are anagrams or not.
+What's Anagram?
+A word, phrase, or name formed by rearranging the letters of another, such as spar, formed from rasp.
+
 
