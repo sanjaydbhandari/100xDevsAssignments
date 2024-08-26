@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            width: 1200px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+        .left{
+            background: #0000ff;
+            padding: 1rem 0;
+        }
+        .right{
+            background: #ff0000;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">Left</div>
+        <div class="right">Right</div>
+    </div>
+</body>
+</html>

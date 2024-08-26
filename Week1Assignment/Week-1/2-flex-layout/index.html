@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-layout</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 1200px;
+            margin: 1rem auto;
+            display: flex;
+        }
+        .left{
+            background-color: blue;
+            flex-grow: 1;
+            padding: 1rem 0;
+        }
+        .right{
+            background-color: rgb(255, 0, 0);
+            flex-grow: 2;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">Left</div>
+        <div class="right">Right</div>
+    </div>
+</body>
+</html>

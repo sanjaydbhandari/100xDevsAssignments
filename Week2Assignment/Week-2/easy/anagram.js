@@ -5,15 +5,11 @@
 
 function isAnagram(str1, str2) {
   if (str1.length != str2.length) return false;
-  let arr1 = str1.split("").sort();
-  let arr2 = str2.split("").sort();
+  let sortedStr1 = str1.split("").sort().join();
+  let sortedStr2 = str2.split("").sort().join();
 
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] != arr2[i]) {
-      return false;
-    }
-  }
-  return true;
+  if(sortedStr1 == sortedStr2) return true;
+  else return false;
 }
 
 let str1 = "nitin";

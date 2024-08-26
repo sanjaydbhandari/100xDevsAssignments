@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-more-complicated-grid</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            margin: 1rem auto;
+            gap: 1rem;
+        }
+        .text-section{
+            padding: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-direction: column;
+            background: #f00;
+            border: 1px solid #000;
+        }
+        .language-section{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background: #0000ff;
+        }
+        li{
+            font-size: 1.5rem;
+            font-weight: bolder;
+            list-style: none;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-section">
+            <h1>Left</h1>
+            <p>text text text text text text text text text text text text</p>
+        </div>
+        <div class="language-section">
+            <li>col 1</li>
+            <li>col 2</li>
+            <li>col 3</li>
+            <li>col 1</li>
+            <li>col 2</li>
+            <li>col 3</li>
+            <li>col 1</li>
+            <li>col 2</li>
+            <li>col 3</li>
+        </div>
+    </div>
+</body>
+</html>
