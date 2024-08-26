@@ -120,6 +120,27 @@ Transaction - an object like
 }
 Output - [{ category: 'Food', totalSpent: 10 }] // Can have multiple categories, only one example is mentioned here
 
+### medium
+
+#### countVowels.js:
+Implement a function `countVowels` that takes a string as an argument and returns the number of vowels in the string.
+Note: Consider both uppercase and lowercase vowels ('a', 'e', 'i', 'o', 'u').
+Once you've implemented the logic, test your code by running
+
+#### palindrome.js:
+Implement a function `isPalindrome` which takes a string as argument and returns true/false as its result.
+Note: the input string is case-insensitive which means 'Nan' is a palindrom as 'N' and 'n' are considered case-insensitive.
+
+#### times.js:
+Write a function that calculates the time (in seconds) it takes for the JS code to calculate sum from 1 to n, given n as the input.
+Try running it for
+1. Sum from 1-100
+2. Sum from 1-100000
+3. Sum from 1-1000000000
+Hint - use Date class exposed in JS
+There is no automated test for this one, this is more for you to understand time goes up as computation goes up
+
+
 #### findLargestElement.js
 Write a function `findLargestElement` that takes an array of numbers and returns the largest element.
   Example:
