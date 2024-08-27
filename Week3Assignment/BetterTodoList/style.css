@@ -44,7 +44,7 @@ body{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: .8rem;
     width: 100%;
     margin-bottom: 1.5rem;
 }
