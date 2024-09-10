@@ -336,9 +336,10 @@ section .landing-page .landing-container {
   align-items: center;
   flex-direction: column;
   padding: 1.4em 5rem;
-  width: 100%;
+  max-width: 1550px;
   background: #fbfbfb;
   border: 1px solid #eee;
+  margin: 0 auto;
 }
 
 .upper-footer-content {
