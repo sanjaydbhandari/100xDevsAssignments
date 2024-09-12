@@ -1,10 +1,7 @@
 {
   "name": "cors",
   "version": "1.0.0",
-<<<<<<< HEAD
-=======
   "description": "",
->>>>>>> 406344b (add cors assignment)
   "main": "index.js",
   "type": "modules",
   "scripts": {
@@ -13,18 +10,10 @@
   },
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.21.0",
-    "nodemon": "^3.1.4"
-=======
   "dependencies": {
     "cors": "file:",
     "express": "^4.20.0",
     "nodemon": "^3.1.4",
     "serve": "^14.2.3"
->>>>>>> 406344b (add cors assignment)
   }
 }
