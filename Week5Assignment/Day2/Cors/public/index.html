@@ -1,31 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CORS Error</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
-    </head>
-    <body>
-        <input type="text" name="a" id="a" placeholder="number 1" />
-        <input type="text" name="b" id="b" placeholder="number 2" />
-        <button onclick="fetchData()">Add</button>
-    </body>
-    <script>
-        async function fetchData() {
-            await axios
-                .post("http://localhost:3333/add", {
-                    a: document.getElementById("a").value,
-                    b: document.getElementById("b").value,
-                })
-                .then((res) => {
-                    console.log(res);
-                });
-        }
-    </script>
-</html>
-=======
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
     <script>
@@ -47,4 +21,3 @@
 </body>
     
 </html>
->>>>>>> 406344b (add cors assignment)
