@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOAPP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <script>
+        function showToast(text,bg) {
+            console.log('sdf')
+            Toastify({
+                text: text,
+                duration: 3000, 
+                gravity: "top", 
+                position: "right", 
+                backgroundColor: bg,
+                close: true 
+            }).showToast();
+        }
+
+        async function signup(){
+            const msgBx = document.getElementById('msg-box');
+            const username = document.getElementById('signup_username').value;
+            const password = document.getElementById('signup_password').value;
+            await axios.post('http://localhost:3000/signup',{
+                username:username,
+                password:password
+            }).then(({data,status})=>{
+                if(status == 200){
+                    showToast(data.message,"green");
+                }
+            }).catch(({response})=>{
+                showToast(response.data.message,"red")
+            })
+        }
+
+        async function signin(){
+            const msgBx = document.getElementById('msg-box');
+            const username = document.getElementById('signin_username').value;
+            const password = document.getElementById('signin_password').value;
+            await axios.post('http://localhost:3000/signin',{
+                username:username,
+                password:password
+            }).then(({data,status})=>{
+                if(status == 200){
+                    localStorage.setItem('token',data.token)
+                    showToast(data.message,"green");
+                }
+            }).catch(({response})=>{
+                showToast(response.data.message,"red")
+            })
+        }
+
+        async function getInfo(){
+            const token = localStorage.getItem('token');
+            await axios.get('http://localhost:3000/courses',{
+                headers:{
+                    token,
+                }
+            }).then()
+        }
+
+        
+
+    </script>
+</head>
+<body>
+    <p id="msg-box">
+    </p>
+    Signup
+    <input type="text" placeholder="username" id="signup_username" minlength="3">
+    <input type="text" placeholder="password" id="signup_password" minlength="8">
+    <button type="submit" onclick="signup()">Signup</button><br>
+    Signin
+    <input type="text" placeholder="username" id="signin_username" minlength="3">
+    <input type="text" placeholder="password" id="signin_password" minlength="8">
+    <button type="submit" onclick="signin()">Signin</button>
+    <div id="userinfo">
+        userinfo
+        <button type="submit" onclick="getInfo()">getInfo</button>
+    </div>
+</body>
+</html>
