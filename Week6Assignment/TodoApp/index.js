@@ -6,22 +6,26 @@ const SECRET_KEY = "ilovecoding";
 
 app.use(express.json())//for body-parser
 app.use(cors())
-let users=[];
-let todoList=[{
-    username: "sanjay",
-    todos:[
-        {
-            "id": 1,
-            "task": "start reactjs",
-            "priority": "Low",
-            "status": "OnHold",
-            "deadline": "1day",
-            "created_at": 1725714369150,
-            "updated_at": null,
-            "deleted": false
-        }
-    ]
-}];
+let users=[
+    {
+        "id":0,
+        "username":"sanjays",
+        "password":"ilovecoding" 
+    }
+];
+let todoList=[
+    {
+        "id": 0,
+        "userId": 1,
+        "task": "task2222",
+        "priority": "priority",
+        "status": "status",
+        "deadline": "deadline",
+        "created_at": "created_at",
+        "updated_at": null,
+        "deleted": false
+    }
+];
 
 const validatePassword=(password)=>{
     const minLength = 8;
@@ -61,34 +65,22 @@ const checkUserExist = (req,res,next) => {
     next();
 }
 
-const auth = (req,res,next) =>{
-    try{
-        const token = req.headers.token;
-        const user = jwt.verify(token,SECRET_KEY);
-        if(user){ 
-            req.username = user.username;
-            next()
-        return }else
-            res.status(400).json({status:400,message:"Unauthorized User! Please, Signin"}) 
-    }catch(err){
-        return res.status(401).json({status:401,message:err.message});
-    }
-}
-
 app.post('/signup',checkUserExist,(req,res)=>{
     const {username,password,isUserExist} = req.body;
     if(!isUserExist){
         const userInserted = users.push({
+            "id":users.length,
             username,
             password
         });
         if(userInserted){
+            console.log(users)
             return res.status(200).json({status:200,message:"User signup succussfully"})
         }else{
             return res.status(400).json({status:400,message:"User signup failed! Please, Try to signup again"})
         }
     }else
-        return res.status(400).json({status:400,message:"User Already Exist!"})
+        return res.status(400).json({status:400,message:"User Already Exist!, Please visit Signin page"})
 });
     
 app.post('/signin',checkUserExist,(req,res)=>{
@@ -99,24 +91,32 @@ app.post('/signin',checkUserExist,(req,res)=>{
     const userFound = users.find((user)=>user.username==username && user.password==password);
     if(userFound){
         const token = jwt.sign({
-            username
+            userId: userFound.id,
+            username: userFound.username
         },SECRET_KEY);
         return res.status(200).json({status:200,message:"User signin succussfully!",token})
     }else return res.status(400).json({status:400,message:"Invalid Password!"})
 })
 
+const auth = (req,res,next) =>{
+    try{
+        const token = req.headers.token;
+        if(!token)
+            return res.status(403).json({status:403,message:"Invalid Token"}) 
 
+        const user = jwt.verify(token,SECRET_KEY);
+        if(user){ 
+            console.log("token value:",user)
+            req.username = user.username; 
+            req.userId = user.userId; 
+            next()
+        }else
+            return res.status(400).json({status:400,message:"Unauthorized User! Please, Signin"}) 
+    }catch(err){
+        return res.status(401).json({status:401,message:err.message});
+    }
+}
 app.use(auth)
-app.get('/',(req,res)=>{
-    console.log(req.username)
-    res.sendFile(__dirname+'/public/index.html');
-})
-
-app.get('/todos',(req,res)=>{
-    console.log("req")
-})
-
-// TODO
 
 const response = (status,message,data=null) => {
     let res = {
@@ -129,31 +129,31 @@ const response = (status,message,data=null) => {
     return res;
 }
 
-app.post('/todos',(req,res)=>{
+app.post('/todo',(req,res)=>{
     try{
         const { task, priority, status, deadline, created_at } = req.body;
         const username = req.username;
-        let userFound = todoList.find((todo)=>todo.username=="sanjay");
-        
-        if(!userFound){
-            let newTodo = {
-                "id": 0,
-                "task": task,
-                "priority": priority,
-                "status": status,
-                "deadline":  deadline,
-                "created_at":  created_at,
-                "updated_at": null,
-                "deleted": false
-            }
-            if(userFound)
-                userFound.push({"username":username,"todos":[newTodo]})
-            else
-                return res.status(200).json(response(200,"Todo Added Succussfully",newTodo))
-        }
-        else{
+        const userId = req.userId;
             
-        }
+        let userFound = todoList.find((todo)=>todo.userId==userId && todo.deleted==false);
+        
+        const inserted = todoList.push({
+            "id": todoList.length,
+            "userId":userId,
+            "task": task,
+            "priority": priority,
+            "status": status,
+            "deadline":  deadline,
+            "created_at":  created_at,
+            "updated_at": null,
+            "deleted": false
+        });
+
+        if(!inserted)
+            return res.status(400).json(response(400,"Failed to Add Todo"))
+
+        return res.status(200).json(response(200,"Todo Added Succussfully"))
+       
     }catch(err){
         return res.status(500).json({"status":500,"message":err.message})
     }
@@ -161,8 +161,7 @@ app.post('/todos',(req,res)=>{
 
 app.get('/todos',(req,res)=>{
     try{
-        let todos = readTodos();
-        todos = todos.filter(todo=>todo.deleted==false)
+        todos = todoList.filter(todo=>todo.deleted==false && todo.userId == req.userId)
         if(!todos || todos.length === 0)
             return res.json(response(400,"Data Not Found",todos));
         return res.status(200).json(response(200,"Data Fetched Succussfully",todos));
@@ -173,10 +172,11 @@ app.get('/todos',(req,res)=>{
 
 app.get('/todos/:id',(req,res)=>{
     try{
-        let todos = readTodos();
-        let todo = todos.find(todo => todo.id == parseInt(req.params.id) && todo.deleted==false);
+        let todo = todoList.find((todo) => todo.id == parseInt(req.params.id) && todo.deleted==false && todo.userId == parseInt(req.userId) );
+        console.log(todo)
+
         if(!todo)
-            return res.status(400).json(response(400,`Invalid Id ${req.params.id}! Todo Not Found`));
+            return res.status(400).json(response(400,`Invalid Todo Id ${req.params.id}! Todo Not Found`));
 
         return res.status(200).json(response(200,"Data Fetched Succussfully",todo));
     }catch(err){
@@ -186,8 +186,7 @@ app.get('/todos/:id',(req,res)=>{
 
 app.get('/filterTodo',(req,res)=>{
     try{
-        let todos = readTodos();
-        let todo = todos.filter(todo => todo.status == req.body.status && todo.priority == req.body.priority && todo.deleted==false);
+        let todo = todoList.filter(todo => todo.status == req.body.status && todo.priority == req.body.priority && todo.deleted==false && todo.userId == parseInt(req.userId));
         if(!todo)
             return res.status(400).json(response(400,`Invalid Id ${req.params.id}! Todo Not Found`));
         return res.status(200).json(response(200,"Data Fetched Succussfully",todo));
@@ -199,18 +198,16 @@ app.get('/filterTodo',(req,res)=>{
 
 app.put('/todos/:id',(req,res)=>{
     try{
-        let todos = readTodos();
-        let index = todos.findIndex(todo=>(todo.id===parseInt(req.params.id) && todo.deleted == false))
+        let index = todoList.findIndex(todo=>(todo.id===parseInt(req.params.id) && todo.deleted == false && todo.userId==req.userId))
         if(index === -1)
             return res.status(400).json(response(400,`Invalid Id ${req.params.id}! Todo Not Found`));
-        todos[index].task = req.body.task;
-        todos[index].priority = req.body.priority;
-        todos[index].status = req.body.status;
-        todos[index].deadline = req.body.deadline;
-        todos[index].updated_at = req.body.updated_at;
-        todos[index].deleted = req.body.deleted;
-        writeTodos(todos);
-        return res.status(200).json(response(200,"Todo Edited Succussfully",todos[index]))
+        todoList[index].task = req.body.task;
+        todoList[index].priority = req.body.priority;
+        todoList[index].status = req.body.status;
+        todoList[index].deadline = req.body.deadline;
+        todoList[index].updated_at = req.body.updated_at;
+        todoList[index].deleted = req.body.deleted;
+        return res.status(200).json(response(200,"Todo Edited Succussfully",todoList[index]))
     }catch(err){
         return res.status(500).json({"status":500,"message":err.message})
     }
@@ -218,31 +215,16 @@ app.put('/todos/:id',(req,res)=>{
 
 app.delete('/todos/:id',(req,res)=>{
     try{
-        let todos = readTodos();
-        let index = todos.findIndex(todo=>(todo.id===parseInt(req.params.id) && todo.deleted == false))
+        let index = todos.findIndex(todo=>(todo.id===parseInt(req.params.id) && todo.deleted == false && todo.userId == parseInt(req.userId)))
         if(index === -1)
             return res.status(400).json(response(400,`Invalid Id ${req.params.id}! Todo Not Found`));
-        todos[index].deleted = true;
-        writeTodos(todos);
-        return res.status(200).json(response(200,"Todo Deleted Succussfully",todos[index]))
+        todoList[index].deleted = true;
+        return res.status(200).json(response(200,"Todo Deleted Succussfully",todoList[index]))
     }catch(err){
         return res.status(500).json({"status":500,"message":err.message})
     }
 });
 
-app.delete('/deleteTodo/:id',(req,res)=>{
-    try{
-        let todos = readTodos();
-        let index = todos.findIndex(todo => todo.id === parseInt(req.params.id))
-        if(index == -1)
-            return res.status(400).json(response(400,`Invalid Id ${req.params.id}! Todo Not Found`));
-        todos.splice(index,1);
-        writeTodos(todos)
-        return res.status(200).json(response(200,`Todo Deleted Succussfully!`))
-    }catch(err){
-        return res.status(500).json({"status":500,"message":err.message});
-    }
-})
 
 PORT=3000;
 app.listen(PORT,()=>console.log(`App is running on http://localhost:${PORT}`));
