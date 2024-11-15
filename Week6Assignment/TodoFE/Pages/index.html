@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOAPP</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    
+</head>
+<body>
+    <div class="navbar">
+        <span>Todo.</span>
+    </div>
+    <div class="container">
+        <div class="collection-header">
+            <span>All Collections</span>
+            <button type="button" onclick="slideDown('.model')">Create New</button>
+        </div>
+        <div class="collection-container">
+            <!-- <div class="collection border">
+                <h1>Personal</h1>
+                <p class="done-count">0/0 Done</p>
+            </div>
+            <div class="collection border"> 
+                <h1>Fitness</h1>
+                <p class="done-count">0/0 Done</p>
+            </div>
+            <div class="collection border">
+                <h1>Grocery</h1>
+                <p class="done-count">0/0 Done</p>
+            </div> -->
+        </div>
+    </div>
+    <div class="model">
+        <div class="collection-input-container border">
+            <h1>Create New Collection</h1>
+            <span onclick="closeModel('.model')">x</span>
+            <div class="input-container">
+                <label for="category">Category 
+                </label>
+                <input id='category' type="text" placeholder="Collection name...">
+            </div>
+            <button onclick="createCategory('#category')">Create</button>
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>

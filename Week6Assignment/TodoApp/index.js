@@ -4,8 +4,8 @@ const cors = require('cors');
 const app = express();
 const SECRET_KEY = "ilovecoding";
 
-app.use(express.json())//for body-parser
-app.use(cors())
+app.use(express.json());//for body-parser
+app.use(cors());
 let users=[
     {
         "id":0,
@@ -13,6 +13,7 @@ let users=[
         "password":"ilovecoding" 
     }
 ];
+
 let todoList=[
     {
         "id": 0,
